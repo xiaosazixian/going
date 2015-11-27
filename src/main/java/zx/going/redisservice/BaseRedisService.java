@@ -31,6 +31,10 @@ public class BaseRedisService<T> {
         return result;
     }
 
+    public boolean updateEntity(final T entity){
+        return addEntity(entity);
+    }
+
     public T getEntity(final Integer id){
         T result =  (T)redisTemplate.execute(new RedisCallback<T>() {
             @Override

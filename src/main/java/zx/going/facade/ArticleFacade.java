@@ -1,15 +1,9 @@
 package zx.going.facade;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
-import org.springframework.data.redis.connection.RedisConnection;
-import org.springframework.data.redis.core.RedisCallback;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.stereotype.Service;
 import zx.going.entity.Article;
-import zx.going.entity.VO.ArticleVO;
+import zx.going.redisservice.ArticleRedisService;
 
 /**
  * Created by zx on 2015/11/21.
@@ -17,5 +11,19 @@ import zx.going.entity.VO.ArticleVO;
 @Service
 public class ArticleFacade {
 
+    @Autowired
+    private ArticleRedisService articleRedisService;
+
+    public Article getArticle(Integer id){
+        return articleRedisService.getEntity(id);
+    }
+
+    public boolean addArticle(Article article){
+        return articleRedisService.addEntity(article);
+    }
+
+    public boolean updateArticle(Article article){
+        return articleRedisService.updateEntity(article);
+    }
 
 }
